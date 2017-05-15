@@ -1,4 +1,4 @@
-package com.coderefer.firebasedatabaseexample.others;
+package com.coderefer.firebasedatabaseexample.util;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
