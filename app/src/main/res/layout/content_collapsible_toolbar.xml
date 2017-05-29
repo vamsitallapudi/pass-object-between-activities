@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:windowBackground">
+
+    <TextView
+        android:id="@+id/tv_detail_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/com_facebook_likeboxcountview_caret_width"
+        android:gravity="center"
+        android:textColor="@android:color/holo_red_light"
+        android:textColorLink="@color/colorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="Sample text Heading" />
+
+    <RatingBar
+        android:id="@+id/rating_detail"
+        android:layout_marginTop="150dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        tools:rating="2.5"
+        android:isIndicator="true" />
+</LinearLayout>

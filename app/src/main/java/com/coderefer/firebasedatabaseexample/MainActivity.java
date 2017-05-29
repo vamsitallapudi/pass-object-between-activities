@@ -2,6 +2,7 @@ package com.coderefer.firebasedatabaseexample;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -11,9 +12,12 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.coderefer.firebasedatabaseexample.fragments.AddMovieFragment;
+import com.coderefer.firebasedatabaseexample.fragments.MovieDetailFragment;
 import com.coderefer.firebasedatabaseexample.models.Movie;
+import com.coderefer.firebasedatabaseexample.util.RecyclerItemClickListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference mDatabaseReference = database.getReference();
 
     private static final String USER_ID = "53";
+    public static final String MOVIE_KEY = "movie_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,23 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setAdapter(adapter);
 
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(MainActivity.this, "Card at " + position + " is clicked", Toast.LENGTH_SHORT).show();
+                Movie movie = adapter.getItem(position);
+                Bundle bundle = new Bundle(0);
+                bundle.putParcelable(MOVIE_KEY,movie);
+                MovieDetailFragment fragment = new MovieDetailFragment();
+                fragment.setArguments(bundle);
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_container, fragment)
+                        .addToBackStack(null)
+                        .commit();
+
+            }
+        }));
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
