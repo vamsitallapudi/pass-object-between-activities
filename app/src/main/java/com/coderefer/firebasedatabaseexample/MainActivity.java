@@ -86,10 +86,11 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Toast.makeText(MainActivity.this, "Card at " + position + " is clicked", Toast.LENGTH_SHORT).show();
                 Movie movie = adapter.getItem(position);
-                Bundle bundle = new Bundle(0);
+                Bundle bundle = new Bundle();
+                //passing the object via bundle
                 bundle.putParcelable(MOVIE_KEY,movie);
                 MovieDetailFragment fragment = new MovieDetailFragment();
-                fragment.setArguments(bundle);
+                fragment.setArguments(bundle);//passing data to fragment
 
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_container, fragment)
